@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import * as solanaWeb3 from "@solana/web3.js";
 import Modal from "./Modal";
-import { fromUnixTime, format, formatDistanceToNow } from "date-fns";
+import { fromUnixTime, formatDistanceToNow } from "date-fns";
 
 type ConfirmedSignatureInfo = {
   /** the transaction signature */
@@ -70,19 +70,19 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
       setIsModalOpen(true);
       console.log(transactionSignatures);
       // Fetch transaction details
-      const transactionList = await Promise.all(
-        transactionSignatures.map(async (signatureInfo) => {
-          const transaction = await connection.getParsedTransaction(
-            signatureInfo.signature
-          );
-          return transaction; // Parsed transaction
-        })
-      ).then(
-        (results) =>
-          results.filter(
-            (tx) => tx !== null
-          ) as solanaWeb3.ParsedTransactionWithMeta[]
-      );
+      // const transactionList = await Promise.all(
+      //   transactionSignatures.map(async (signatureInfo) => {
+      //     const transaction = await connection.getParsedTransaction(
+      //       signatureInfo.signature
+      //     );
+      //     return transaction; // Parsed transaction
+      //   })
+      // ).then(
+      //   (results) =>
+      //     results.filter(
+      //       (tx) => tx !== null
+      //     ) as solanaWeb3.ParsedTransactionWithMeta[]
+      // );
     } catch (err) {
       setError(
         "Failed to fetch Solana data. Please check the address and try again."
