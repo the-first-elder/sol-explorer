@@ -36,6 +36,7 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   useEffect(() => {
     if (address) {
       fetchSolanaInfo();
@@ -59,7 +60,7 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
       const transactionSignatures = await connection.getSignaturesForAddress(
         pubKey,
         {
-          limit: 8, // Fetch last 5 transactions
+          limit: 8, // Fetch last 8 transactions
         }
       );
 
@@ -67,9 +68,11 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
         accountBalance,
         transactionSignatures,
       });
+
       setIsModalOpen(true);
       console.log(transactionSignatures);
-      // Fetch transaction details
+
+      // Fetch transaction details (optional)
       // const transactionList = await Promise.all(
       //   transactionSignatures.map(async (signatureInfo) => {
       //     const transaction = await connection.getParsedTransaction(
@@ -83,11 +86,15 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
       //       (tx) => tx !== null
       //     ) as solanaWeb3.ParsedTransactionWithMeta[]
       // );
+
     } catch (err) {
       setError(
         "Failed to fetch Solana data. Please check the address and try again."
       );
-
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -120,16 +127,20 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
                 {data.transactionSignatures.map((tx, index) => (
                   <tr key={index} className="border-t">
                     <td className="py-2 px-4 border">
-                      <a href={`https://solscan.io/tx/${tx.signature}`}>
+                      <a href={`https://solscan.io/tx/${tx.signature}`} target="_blank" rel="noopener noreferrer">
                         {tx.signature.slice(0, 9)}...
                       </a>
                     </td>
                     <td className="py-2 px-4 border">{tx.slot}</td>
-                    <td className="py-2 px-4 border">{formatDistanceToNow(fromUnixTime(tx.blockTime as number), {
-                      includeSeconds: true,
-                    })} ago </td>
                     <td className="py-2 px-4 border">
-                      {tx.confirmationStatus}
+                      {tx.blockTime
+                        ? formatDistanceToNow(fromUnixTime(tx.blockTime), {
+                          includeSeconds: true,
+                        }) + " ago"
+                        : "N/A"}
+                    </td>
+                    <td className="py-2 px-4 border">
+                      {tx.confirmationStatus || "N/A"}
                     </td>
                   </tr>
                 ))}

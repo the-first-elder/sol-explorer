@@ -17,10 +17,7 @@
     "ts-node": "^10.9.2",
     "date-fns": "^3.6.0",
     "react-router-dom": "^6.25.1"
-<<<<<<< HEAD
-=======
 
->>>>>>> 763baa89b8ac00137c029b478759bcdea3a1c721
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

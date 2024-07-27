@@ -107,7 +107,7 @@ const Stats: React.FC = () => {
           </div>
           <div className="flex flex-col items-center">
             <p className="text-2xl font-bold">${statistics.solPrice}</p>
-            <p className="text-gray-600">Storage Price</p>
+            <p className="text-gray-600">Solana Price in $</p>
           </div>
           <div className="flex flex-col items-center">
             <p className="text-2xl font-bold">{statistics.min}</p>
