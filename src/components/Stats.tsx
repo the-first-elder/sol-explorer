@@ -12,7 +12,7 @@ const Stats: React.FC = () => {
           "https://api-mainnet.magiceden.dev/v2/collections",
           {
             method: "GET",
-            // mode: "no-corcs",
+            mode: "no-cors",
             headers: {
               accept: "application/json",
             },
