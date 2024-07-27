@@ -12,7 +12,7 @@ const Validators: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white p-4 rounded shadow-md">
+    <div className="bg-white p-4 rounded shadow-md overflow-x-auto">
       <h2 className="text-xl font-bold mb-4">Top Validators</h2>
       <table className="w-full border-collapse">
         <thead>
