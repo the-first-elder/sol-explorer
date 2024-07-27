@@ -66,7 +66,7 @@ const Transactions: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow-md">
+    <div className="bg-white p-4 rounded shadow-md overflow-x-auto">
       <div className="flex justify-between mb-4">
         <h2 className="text-xl font-bold">Transactions</h2>
         <div className="flex space-x-4">

@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@solana/web3.js": "^1.95.2",
+=======
+    "axios": "^1.7.2",
+>>>>>>> 3c9f0aa21c8cba2f0d17300b84fcdd72704640f3
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -28,5 +32,6 @@
     "tailwindcss": "^3.4.7",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
-  }
+  },
+  "proxy": "https://api-mainnet.magiceden.dev/v2/collections"
 }
