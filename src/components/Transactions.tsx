@@ -3,8 +3,6 @@ import React, { useState } from "react";
 const Transactions: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Transactions");
 
- 
-
   const transactions = [
     {
       time: "7s ago",
@@ -25,13 +23,13 @@ const Transactions: React.FC = () => {
     // Add more transactions here
   ];
 
-  //   const epochs: [] = [
-  //     // Add epoch data here
-  //   ];
+  // const epochs: [] = [
+  //   // Add epoch data here
+  // ];
 
-  //   const checkpoints: [] = [
-  //     // Add checkpoint data here
-  //   ];
+  // const checkpoints: [] = [
+  //   // Add checkpoint data here
+  // ];
 
   const renderTableContent = () => {
     switch (activeTab) {
@@ -47,19 +45,21 @@ const Transactions: React.FC = () => {
           </tr>
         ));
       case "Epochs":
-      // return epochs.map((epoch, index) => (
-      //   <tr key={index}>
-      //     {/* <td className="border p-2">{epoch.time}</td>
-      //     <td className="border p-2">{epoch.event}</td> */}
-      //   </tr>
-      // ));
+        // return epochs.map((epoch, index) => (
+        //   <tr key={index}>
+        //     {/* <td className="border p-2">{epoch.time}</td>
+        //     <td className="border p-2">{epoch.event}</td> */}
+        //   </tr>
+        // ));
+        return null; // Placeholder until epochs data is added
       case "Checkpoints":
-      // return checkpoints.map((checkpoint, index) => (
-      //   <tr key={index}>
-      //     {/* <td className="border p-2">{checkpoint.time}</td>
-      //     <td className="border p-2">{checkpoint.details}</td> */}
-      //   </tr>
-      // ));
+        // return checkpoints.map((checkpoint, index) => (
+        //   <tr key={index}>
+        //     {/* <td className="border p-2">{checkpoint.time}</td>
+        //     <td className="border p-2">{checkpoint.details}</td> */}
+        //   </tr>
+        // ));
+        return null; // Placeholder until checkpoints data is added
       default:
         return null;
     }
@@ -71,31 +71,28 @@ const Transactions: React.FC = () => {
         <h2 className="text-xl font-bold">Transactions</h2>
         <div className="flex space-x-4">
           <button
-            className={`p-2 ${
-              activeTab === "Transactions"
+            className={`p-2 ${activeTab === "Transactions"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-gray-800"
-            }`}
+              }`}
             onClick={() => setActiveTab("Transactions")}
           >
             Transactions
           </button>
           <button
-            className={`p-2 ${
-              activeTab === "Epochs"
+            className={`p-2 ${activeTab === "Epochs"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-gray-800"
-            }`}
+              }`}
             onClick={() => setActiveTab("Epochs")}
           >
             Epochs
           </button>
           <button
-            className={`p-2 ${
-              activeTab === "Checkpoints"
+            className={`p-2 ${activeTab === "Checkpoints"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-gray-800"
-            }`}
+              }`}
             onClick={() => setActiveTab("Checkpoints")}
           >
             Checkpoints

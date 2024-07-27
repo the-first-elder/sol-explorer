@@ -26,7 +26,7 @@ const Stats: React.FC = () => {
     try {
       // Fetch requests for both APIs
       const pingThingStatsRequest = await fetch(
-        '/api/api/v1/ping-thing-stats/mainnet.json?interval=1',
+        '/api/api/v1/ping-thing-stats/mainnet.json?interval=3',
         {
           headers: {
             'Token': 'WKbLWvVjERoQ5utRzC842fZN',
@@ -73,12 +73,13 @@ const Stats: React.FC = () => {
 
       // Assume both data objects have relevant fields to map to Statistics
       const newStatistics: Statistics = {
-        median: pingThingStatsData.median,
-        max: pingThingStatsData.max,
-        min: pingThingStatsData.min,
+        median: pingThingStatsData[0].median,
+        max: pingThingStatsData[0].max,
+        min: pingThingStatsData[0].min,
         solPrice: solPricesData.solana.usd,
       };
 
+      console.log({max: pingThingStatsData.max})
       // Update state with the new statistics
       setStatistics(newStatistics);
 
