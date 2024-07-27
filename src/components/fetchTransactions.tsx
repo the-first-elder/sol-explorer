@@ -88,11 +88,17 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
         "Failed to fetch Solana data. Please check the address and try again."
       );
 
+<<<<<<< HEAD
+        try {
+            const pubKey = new solanaWeb3.PublicKey(address);
+            const connection = new solanaWeb3.Connection('https://solana-mainnet.g.alchemy.com/v2/aleYeT5BI1MFFXJw37SiYu_FdeYMaMqb');
+=======
       console.log(err);
     } finally {
       setLoading(false);
     }
   };
+>>>>>>> e3b7dfe9433b6499e669ff0a1f7cdbeaf3115fff
 
   return (
     <div>

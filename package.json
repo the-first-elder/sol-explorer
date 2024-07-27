@@ -12,10 +12,16 @@
   "dependencies": {
     "@solana/web3.js": "^1.95.2",
     "axios": "^1.7.2",
+<<<<<<< HEAD
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ts-node": "^10.9.2"
+=======
     "date-fns": "^3.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1"
+>>>>>>> e3b7dfe9433b6499e669ff0a1f7cdbeaf3115fff
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

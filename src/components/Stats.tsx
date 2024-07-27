@@ -1,64 +1,119 @@
-// import React, { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
+
+// Define the Statistics interface to represent the shape of data
+interface Statistics {
+  median: number;
+  max: number;
+  min: number;
+  solPrice: number;
+}
 
 const Stats: React.FC = () => {
-  // const [data, setData] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-  // const apiKey = "ocw995bjfTnmRgm3npxgYiyC";
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         "https://api-mainnet.magiceden.dev/v2/collections",
-  //         {
-  //           method: "GET",
-  //           mode: "no-cors",
-  //           headers: {
-  //             accept: "application/json",
-  //           },
-  //         }
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       const result = await response.json();
-  //       setData(result);
-  //     } catch (error: any) {
-  //       setError(error.message);
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  const [statistics, setStatistics] = useState<Statistics | null>(null); // Change to single Statistics object
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchStatistics();
+  }, []);
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error}</p>;
+  // Fetch data from both APIs and update state
+  const fetchStatistics = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Fetch requests for both APIs
+      const pingThingStatsRequest = await fetch(
+        '/api/api/v1/ping-thing-stats/mainnet.json?interval=1',
+        {
+          headers: {
+            'Token': 'WKbLWvVjERoQ5utRzC842fZN',
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log(pingThingStatsRequest)
+
+      const solPricesRequest = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd', {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          'x-cg-demo-api-key': 'CG-17w5cCm13c4r6KUnKjZFKXak',
+        },
+      });
+
+      // Wait for both requests to resolve
+      const [pingThingStatsResponse, solPricesResponse] = await Promise.all([
+        pingThingStatsRequest,
+        solPricesRequest,
+      ]);
+
+      // Check for errors in pingThingStatsResponse
+      if (!pingThingStatsResponse.ok) {
+        const errorText = await pingThingStatsResponse.text();
+        throw new Error(
+          `Error fetching ping-thing stats: ${pingThingStatsResponse.status} ${pingThingStatsResponse.statusText}. Response: ${errorText}`
+        );
+      }
+
+      // Check for errors in solPricesResponse
+      if (!solPricesResponse.ok) {
+        const errorText = await solPricesResponse.text();
+        throw new Error(
+          `Error fetching sol prices: ${solPricesResponse.status} ${solPricesResponse.statusText}. Response: ${errorText}`
+        );
+      }
+
+      // Parse JSON responses
+      const pingThingStatsData = await pingThingStatsResponse.json();
+      const solPricesData = await solPricesResponse.json();
+
+      // Assume both data objects have relevant fields to map to Statistics
+      const newStatistics: Statistics = {
+        median: pingThingStatsData.median,
+        max: pingThingStatsData.max,
+        min: pingThingStatsData.min,
+        solPrice: solPricesData.solana.usd,
+      };
+
+      // Update state with the new statistics
+      setStatistics(newStatistics);
+
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-white p-4 rounded shadow-md">
-      <h2 className="text-xl font-bold mb-4">
-      Statistics
-      </h2>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="flex flex-col items-center">
-          <p className="text-2xl font-bold">32.71K</p>
-          <p className="text-gray-600">Median Gas Fee</p>
+      <h2 className="text-xl font-bold mb-4">Statistics</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+      {statistics && (
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col items-center">
+            <p className="text-2xl font-bold">{statistics.median}</p>
+            <p className="text-gray-600">Median Gas Fee</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="text-2xl font-bold">{statistics.max}</p>
+            <p className="text-gray-600">Gas Fee Max</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="text-2xl font-bold">${statistics.solPrice}</p>
+            <p className="text-gray-600">Storage Price</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="text-2xl font-bold">{statistics.min}</p>
+            <p className="text-gray-600">Gas Fee Min</p>
+          </div>
         </div>
-        <div className="flex flex-col items-center">
-          <p className="text-2xl font-bold">382.29K</p>
-          <p className="text-gray-600">Gas Fee Max</p>
-        </div>
-        <div className="flex flex-col items-center">
-          <p className="text-2xl font-bold">31.42K</p>
-          <p className="text-gray-600">Storage Price</p>
-        </div>
-        <div className="flex flex-col items-center">
-          <p className="text-2xl font-bold">17.18K</p>
-          <p className="text-gray-600">Gas Fee Min</p>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
