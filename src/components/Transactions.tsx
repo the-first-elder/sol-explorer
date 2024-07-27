@@ -6,18 +6,18 @@ const Transactions: React.FC = () => {
   const transactions = [
     {
       time: "7s ago",
-      type: "TransferSui",
+      type: "Transfer",
       txID: "1KL...",
       transfers: "0x...7d7",
-      amount: "477.06 SUI",
+      amount: "477.06 SOl",
       gas: "15.51",
     },
     {
       time: "26s ago",
-      type: "TransferObj",
+      type: "Transfer",
       txID: "0e2...5Ve",
       transfers: "0x...d8b",
-      amount: "683.90 SUI",
+      amount: "683.90 SOL",
       gas: "11.35",
     },
     // Add more transactions here

@@ -87,8 +87,7 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
       setError(
         "Failed to fetch Solana data. Please check the address and try again."
       );
-  }
-  };
+
 
   return (
     <div>
