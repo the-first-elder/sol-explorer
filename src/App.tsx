@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import Transactions from "./components/Transactions";
 import Validators from "./components/Validators";
 import Stats from "./components/Stats";
-import Map from "./components/Map";
+// import Map from "./components/Map";
 import TopNFTCollections from "./components/TopNFTCollections";
 import "./App.css";
 
