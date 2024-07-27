@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <div className="w-full md:w-2/3 flex flex-col gap-4">
           <Stats />
           <Transactions />
-          <Map />
+          {/* <Map /> */}
         </div>
         <div className="w-full md:w-1/3 flex flex-col gap-4">
           <Validators />
