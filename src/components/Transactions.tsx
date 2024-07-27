@@ -3,6 +3,8 @@ import React, { useState } from "react";
 const Transactions: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Transactions");
 
+ 
+
   const transactions = [
     {
       time: "7s ago",
