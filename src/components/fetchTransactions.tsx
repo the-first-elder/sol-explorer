@@ -37,7 +37,7 @@ const SolanaInfo: React.FC<SolanaInfoProps> = ({ address }) => {
 
         try {
             const pubKey = new solanaWeb3.PublicKey(address);
-            const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('devnet'));
+            const connection = new solanaWeb3.Connection('https://solana-mainnet.g.alchemy.com/v2/aleYeT5BI1MFFXJw37SiYu_FdeYMaMqb');
 
             // Fetch account balance
             const accountBalance = await connection.getBalance(pubKey);
