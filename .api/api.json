@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "tallal-test",
+      "source": "@tallal-test/v1.1#aeuqxshlv1ie27t",
+      "integrity": "sha512-l/VPnMRWVev51MlNmhsKpiTJhxZVHpKfcU+79gzI9uMp2bB+wEg9p7D9O0O8RDmmzMAjOpaY4K7+g9814JrGeQ==",
+      "installerVersion": "6.1.2"
+    }
+  ]
+}

@@ -1,11 +1,17 @@
-const pingThingStatsRequest =  fetch(
-    '/api/api/v1/ping-thing-stats/mainnet.json?interval=1',
-    {
-        headers: {
-            'Token': 'WKbLWvVjERoQ5utRzC842fZN',
-            'Content-Type': 'application/json',
-        },
-    }
+import { Connection } from '@solana/web3.js';
+
+const connection = new Connection(
+    "https://solana-mainnet.g.alchemy.com/v2/aleYeT5BI1MFFXJw37SiYu_FdeYMaMqb"
 );
 
-console.log(pingThingStatsRequest)
+const fetchNodes = async () => {
+    try {
+        // Await the promise to get the cluster nodes
+        const nodes = await connection.getClusterNodes();
+        console.log(nodes);
+    } catch (error) {
+        console.error("Error fetching cluster nodes:", error);
+    }
+};
+
+fetchNodes();
