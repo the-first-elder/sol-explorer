@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Transactions from "./components/Transactions";
+// import Transactions from "./components/Transactions";
 import Validators from "./components/Validators";
 import Stats from "./components/Stats";
 import Map from "./components/Map";
@@ -15,7 +15,7 @@ const App: React.FC = () => {
       <main className="flex-grow p-4 flex flex-col md:flex-row gap-4">
         <div className="w-full md:w-2/3 flex flex-col gap-4">
           <Stats />
-          <Transactions />
+          {/* <Transactions /> */}
           <Map />
         </div>
         <div className="w-full md:w-1/3 flex flex-col gap-4">

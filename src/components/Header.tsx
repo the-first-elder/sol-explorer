@@ -14,7 +14,7 @@ const Header: React.FC = () => {
       <input
         type="text"
         value={address}
-        placeholder="Search Addresses, Objects, Transactions, Epochs"
+        placeholder="Search Addresses,Programs, Transactions"
         className="w-full max-w-lg mt-2 md:mt-0 p-2 rounded text-black "
         onChange={handleInputChange}
       />
